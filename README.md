@@ -4,6 +4,7 @@
 [![license](https://img.shields.io/github/license/h-exx/docker-openttd-patches)](https://github.com/rogerrum/docker-openttd/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/h-exx/docker-openttd-patches.svg)](https://github.com/h-exx/docker-openttd-patches)
 [![Contributors](https://img.shields.io/github/contributors/h-exx/docker-openttd-patches.svg)](https://github.com/h-exx/docker-openttd-patches/graphs/contributors)
+[![Docker Image CI](https://github.com/h-exx/docker-openttd-patches/actions/workflows/dockerimage.yml/badge.svg)](https://github.com/h-exx/docker-openttd-patches/actions/workflows/dockerimage.yml)
 
 
 A Docker image for **[OpenTTD Patches](https://github.com/JGRennison/OpenTTD-patche)** to run inside Docker container and access it remotely using web browser.
