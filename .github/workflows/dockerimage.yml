@@ -33,11 +33,11 @@ jobs:
       - name: Output Versions
         run: |
           # Output the versions for further use
-          echo "Latest OpenTTD Release: ${{ steps.get_ttd_version.outputs.version }}"
+          echo "Latest OpenTTD Release: ${{ steps.get_openttd_version.outputs.version }}"
           echo "Latest OpenGFX Release: ${{ steps.get_gfx_version.outputs.version }}"
 
     outputs:
-      openttd: ${{ steps.get_openttd_patches_version.version }}
+      openttd: ${{ steps.get_openttd_patches_version.outputs.version }}
       opengfx: ${{ steps.get_gfx_version.outputs.version }}
 
   check-image-version:
