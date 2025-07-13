@@ -1,9 +1,9 @@
 # Docker Image for OpenTTD
 
-[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/rogerrum/docker-openttd?sort=semver)](https://hub.docker.com/r/rogerrum/docker-openttd/tags)
-[![license](https://img.shields.io/github/license/rogerrum/docker-openttd)](https://github.com/rogerrum/docker-openttd/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/rogerrum/docker-openttd.svg)](https://github.com/rogerrum/docker-openttd)
-[![Contributors](https://img.shields.io/github/contributors/rogerrum/docker-openttd.svg)](https://github.com/rogerrum/docker-openttd/graphs/contributors)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/hhexx/docker-openttd-patches?sort=semver)](https://hub.docker.com/r/hhexx/docker-openttd-patches/tags)
+[![license](https://img.shields.io/github/license/h-exx/docker-openttd-patches)](https://github.com/rogerrum/docker-openttd/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/h-exx/docker-openttd-patches.svg)](https://github.com/h-exx/docker-openttd-patches)
+[![Contributors](https://img.shields.io/github/contributors/h-exx/docker-openttd-patches.svg)](https://github.com/h-exx/docker-openttd-patches/graphs/contributors)
 
 
 A Docker image for **[OpenTTD Patches](https://github.com/JGRennison/OpenTTD-patche)** to run inside Docker container and access it remotely using web browser.
