@@ -86,8 +86,8 @@ jobs:
         uses: azure/docker-login@v2
         with:
           login-server: ghcr.io
-          username: ${{ secrets.GITHUB_USERNAME }}
-          password: ${{ secrets.GITHUB_PASSWORD }}
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.GH_PASSWORD }}
 
       - name: Set up Qemu
         uses: docker/setup-qemu-action@v3
