@@ -9,20 +9,20 @@ on:
       - main
 
 env:
-  DOCKER_REPO_NAME: rogerrum
-  DOCKER_IMAGE_NAME: docker-openttd
+  DOCKER_REPO_NAME: h-exx
+  DOCKER_IMAGE_NAME: docker-openttd-patches
 
 jobs:
   # Get list of versions
   get-latest-version:
-    name: Get Latest Release Version for OpenTTD/OpenGFX
+    name: Get Latest Release Version for OpenTTD-Patches/OpenGFX
     runs-on: ubuntu-latest
     steps:
-      - name: Get TTD Version
-        id: get_ttd_version
+      - name: Get OpenTTD Patches Version
+        id: get_openttd_patches_version
         run: |
           # Fetch the latest stable release (exclude beta versions)
-          echo "version=$(curl -s -H 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/OpenTTD/OpenTTD/releases | jq -cMr '([.[]|select(all(.tag_name; contains("beta")|not))])|.[:1]|.[].tag_name')" >> "${GITHUB_OUTPUT}"
+          echo "version=$(curl -s -H 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/JGRennison/OpenTTD-patches/releases | jq -cMr '([.[]|select(all(.tag_name; contains("beta")|not))])|.[:1]|.[].tag_name')" >> "${GITHUB_OUTPUT}"
 
       - name: Get GFX Version
         id: get_gfx_version
@@ -37,7 +37,7 @@ jobs:
           echo "Latest OpenGFX Release: ${{ steps.get_gfx_version.outputs.version }}"
 
     outputs:
-      openttd: ${{ steps.get_ttd_version.outputs.version }}
+      openttd: ${{ steps.get_openttd_patches_version.version }}
       opengfx: ${{ steps.get_gfx_version.outputs.version }}
 
   check-image-version:
@@ -49,7 +49,7 @@ jobs:
         id: check_image
         run: |
           # Replace 'your-container-registry' and 'your-repo' with your actual container registry and repository names
-          if docker pull rogerrum/docker-openttd:${{ needs.get-latest-version.outputs.openttd }}; then
+          if docker pull h-exx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}; then
             echo "Image version already exists. Skipping build."
             echo "skip_build=true" >> "${GITHUB_OUTPUT}"
           else
@@ -110,10 +110,10 @@ jobs:
             OPENTTD_VERSION=${{ needs.get-latest-version.outputs.openttd }}
             OPENGFX_VERSION=${{ needs.get-latest-version.outputs.opengfx }}
           tags: |
-            rogerrum/docker-openttd:${{ needs.get-latest-version.outputs.openttd }}
-            rogerrum/docker-openttd:latest
-            ghcr.io/rogerrum/docker-openttd:latest
-            ghcr.io/rogerrum/docker-openttd:${{ needs.get-latest-version.outputs.openttd }}
+            h-exx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}
+            h-exx/docker-openttd-patches:latest
+            ghcr.io/h-exx/docker-openttd-patches:latest
+            ghcr.io/h-exx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}
 
       - name: Docker Hub Description
         if: github.event_name != 'pull_request'
@@ -121,14 +121,14 @@ jobs:
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: rogerrum/docker-openttd
+          repository: h-exx/docker-openttd-patches
 
       # Trivy test
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         id: trivy
         with:
-          image-ref: 'ghcr.io/rogerrum/docker-openttd:${{ needs.get-latest-version.outputs.openttd }}'
+          image-ref: 'ghcr.io/h-exx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}'
           format: 'sarif'
           exit-code: '0'
           ignore-unfixed: true
