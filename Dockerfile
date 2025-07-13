@@ -1,15 +1,15 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbullseye
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
 
 # set version label
-ARG OPENTTD_VERSION="13.4"
+ARG OPENTTD_PATCHES_VERSION="0.65.4"
 ARG OPENGFX_VERSION="7.1"
 
 RUN apt-get update -y && \
-    echo "**** install Open TTD ****" && \
+    echo "**** install Open TTD Patches ****" && \
     DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y --no-install-recommends dumb-init wget unzip ca-certificates xz-utils
 
-RUN  wget -q -O /tmp/openttd.tar.xz https://cdn.openttd.org/openttd-releases/${OPENTTD_VERSION}/openttd-${OPENTTD_VERSION}-linux-generic-amd64.tar.xz
+RUN  wget -q -O /tmp/openttd.tar.xz https://github.com/JGRennison/OpenTTD-patches/releases/download/jgrpp-${OPENTTD_PATCHES_VERSION}/openttd-jgrpp-${OPENTTD_PATCHES_VERSION}-linux-generic-amd64.tar.xz
 
 RUN mkdir -p /usr/share/games/ && \
     tar -xvf /tmp/openttd.tar.xz -C /usr/share/games/ && \
@@ -30,7 +30,7 @@ COPY /root /
 EXPOSE 3000
 
 LABEL org.opencontainers.image.source=https://github.com/rogerrum/docker-openttd
-LABEL org.opencontainers.image.description="OpenTTD"
+LABEL org.opencontainers.image.description="OpenTTD Patches"
 LABEL org.opencontainers.image.licenses=Apache-2.0
 
 VOLUME /config
