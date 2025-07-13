@@ -49,7 +49,8 @@ services:
     container_name: openttd-patches
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - 3000:3000 # Web UI
+      #- 3979:3979 # Dedicated Server Port
     volumes:
       - ./config:/config:rw
 ```
