@@ -107,7 +107,7 @@ jobs:
           pull: true
           platforms: linux/arm64,linux/amd64
           build-args: |
-            OPENTTD_VERSION=${{ needs.get-latest-version.outputs.openttd }}
+            OPENTTD_PATCHES_VERSION=${{ needs.get-latest-version.outputs.openttd }}
             OPENGFX_VERSION=${{ needs.get-latest-version.outputs.opengfx }}
           tags: |
             hhexx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}
