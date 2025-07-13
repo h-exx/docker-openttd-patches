@@ -22,7 +22,7 @@ jobs:
         id: get_openttd_patches_version
         run: |
           # Fetch the latest stable release (exclude beta versions)
-          echo "version=$(curl -s -H 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/JGRennison/OpenTTD-patches/releases | jq -cMr 'map(select(.tag_name | test("beta"; "i") | not))[0].tag_name')" >> "${GITHUB_OUTPUT}"
+          echo "version=$(curl -s -H 'Accept: application/vnd.github.v3+json' https://api.github.com/repos/JGRennison/OpenTTD-patches/releases | jq -cMr '.[0].tag_name|sub("^jgrpp-";"")')" >> "${GITHUB_OUTPUT}"
 
       - name: Get GFX Version
         id: get_gfx_version
