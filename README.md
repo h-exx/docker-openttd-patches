@@ -8,8 +8,8 @@
 
 A Docker image for **[OpenTTD Patches](https://github.com/JGRennison/OpenTTD-patche)** to run inside Docker container and access it remotely using web browser.
 
-Repository name in ghcr.io: **[ghcr.io/h-exx/docker-openttd-patches](https://ghcr.io/rogerrum/docker-openttd)**  
-Repository name in Docker Hub: **[rogerrum/docker-openttd-patches](https://hub.docker.com/r/rogerrum/docker-openttd/)**  
+Repository name in ghcr.io: **[ghcr.io/h-exx/docker-openttd-patches](https://ghcr.io/h-exx/docker-openttd-patches)**  
+Repository name in Docker Hub: **[hhexx/docker-openttd-patches](https://hub.docker.com/r/hhexx/docker-openttd-patches)**  
 Published via **automated build** mechanism  
 
 ## Docker Run
