@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  DOCKER_REPO_NAME: h-exx
+  DOCKER_REPO_NAME: hhexx
   DOCKER_IMAGE_NAME: docker-openttd-patches
 
 jobs:
@@ -49,7 +49,7 @@ jobs:
         id: check_image
         run: |
           # Replace 'your-container-registry' and 'your-repo' with your actual container registry and repository names
-          if docker pull h-exx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}; then
+          if docker pull hhexx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}; then
             echo "Image version already exists. Skipping build."
             echo "skip_build=true" >> "${GITHUB_OUTPUT}"
           else
@@ -110,8 +110,8 @@ jobs:
             OPENTTD_VERSION=${{ needs.get-latest-version.outputs.openttd }}
             OPENGFX_VERSION=${{ needs.get-latest-version.outputs.opengfx }}
           tags: |
-            h-exx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}
-            h-exx/docker-openttd-patches:latest
+            hhexx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}
+            hhexx/docker-openttd-patches:latest
             ghcr.io/h-exx/docker-openttd-patches:latest
             ghcr.io/h-exx/docker-openttd-patches:${{ needs.get-latest-version.outputs.openttd }}
 
@@ -121,7 +121,7 @@ jobs:
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: h-exx/docker-openttd-patches
+          repository: hhexx/docker-openttd-patches
 
       # Trivy test
       - name: Run Trivy vulnerability scanner
