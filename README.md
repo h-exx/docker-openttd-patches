@@ -1,4 +1,5 @@
-# Docker Image for OpenTTD
+# Docker Image for OpenTTD Patches
+#### Forked from [rogerrum/docker-openttd](https://github.com/rogerrum/docker-openttd)
 
 [![Docker Image Version (latest semver)](https://img.shields.io/docker/v/hhexx/docker-openttd-patches?sort=semver)](https://hub.docker.com/r/hhexx/docker-openttd-patches/tags)
 [![license](https://img.shields.io/github/license/h-exx/docker-openttd-patches)](https://github.com/rogerrum/docker-openttd/blob/main/LICENSE)
@@ -7,7 +8,7 @@
 [![Docker Image CI](https://github.com/h-exx/docker-openttd-patches/actions/workflows/dockerimage.yml/badge.svg)](https://github.com/h-exx/docker-openttd-patches/actions/workflows/dockerimage.yml)
 
 
-A Docker image for **[OpenTTD Patches](https://github.com/JGRennison/OpenTTD-patche)** to run inside Docker container and access it remotely using web browser.
+A Docker image for **[OpenTTD Patches](https://github.com/JGRennison/OpenTTD-patches)** to run inside Docker container and access it remotely using web browser.
 
 Repository name in ghcr.io: **[ghcr.io/h-exx/docker-openttd-patches](https://ghcr.io/h-exx/docker-openttd-patches)**  
 Repository name in Docker Hub: **[hhexx/docker-openttd-patches](https://hub.docker.com/r/hhexx/docker-openttd-patches)**  
@@ -55,6 +56,13 @@ services:
     volumes:
       - ./config:/config:rw
 ```
+
+## Where do I find my saves?
+In the `/config` file on the host system, there is a hidden .local folder.<br>
+The full path would be: `/config/.local/share/openttd/save/`
+
+In the Web UI, it is in the following path:
+`~/.local/share/openttd/save`
 
 ## Issues
 https://github.com/h-exx/docker-openttd-patches/issues
