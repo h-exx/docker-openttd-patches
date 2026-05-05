@@ -91,7 +91,7 @@ services:
     container_name: openttd-patches
     restart: unless-stopped
     security_opt:
-      - seccomp:unconfined
+      - seccomp=unconfined
     ports:
       - 3000:3000 # Web UI
       #- 3979:3979 # Dedicated Server Port
