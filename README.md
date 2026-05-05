@@ -67,22 +67,24 @@ In the Web UI, it is in the following path:
 ## Troubleshooting
 
 ### Invalid permissions / files not found
-On some systems, the default Docker [seccomp](https://docs.docker.com/engine/security/seccomp/) profile restricts syscalls that the OpenTTD binary requires, resulting in "permission denied" or "file not found" errors at startup.
+On some systems, the default Docker [seccomp](https://docs.docker.com/engine/security/seccomp/) profile omits newer syscalls (such as `clone3`, used by modern glibc for thread creation) that the OpenTTD or KasmVNC stack requires. This causes permission denied or "file not found" errors at startup.
 
-**Workaround:** disable the seccomp profile for the container.
+**Fix:** use the included `seccomp-openttd.json` profile instead of the Docker default. This profile allows any syscall not explicitly blocked, while still blocking genuinely dangerous operations (loading kernel modules, rebooting, raw hardware I/O, ptrace-based process inspection, mounting filesystems, and similar). It is more secure than fully disabling seccomp.
+
+First, clone or download `seccomp-openttd.json` from this repository to your local machine.
 
 Docker Run:
 ```
 docker run \
     -d --rm \
     --name openttd-patches \
-    --security-opt seccomp=unconfined \
-    -v=${pwd}/config:/config \
+    --security-opt seccomp=$(pwd)/seccomp-openttd.json \
+    -v=$(pwd)/config:/config \
     --publish=3000:3000 \
-     ghcr.io/h-exx/docker-openttd-patches:latest
+    ghcr.io/h-exx/docker-openttd-patches:latest
 ```
 
-Docker Compose:
+Docker Compose (place `seccomp-openttd.json` in the same directory as your `docker-compose.yml`):
 ```yaml
 version: '3.8'
 services:
@@ -91,7 +93,7 @@ services:
     container_name: openttd-patches
     restart: unless-stopped
     security_opt:
-      - seccomp=unconfined
+      - seccomp=./seccomp-openttd.json
     ports:
       - 3000:3000 # Web UI
       #- 3979:3979 # Dedicated Server Port
