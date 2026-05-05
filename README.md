@@ -71,7 +71,7 @@ On some systems, the default Docker [seccomp](https://docs.docker.com/engine/sec
 
 **Fix:** use the included `seccomp-openttd.json` profile instead of the Docker default. This profile allows any syscall not explicitly blocked, while still blocking genuinely dangerous operations (loading kernel modules, rebooting, raw hardware I/O, ptrace-based process inspection, mounting filesystems, and similar). It is more secure than fully disabling seccomp.
 
-First, clone or download `seccomp-openttd.json` from this repository to your local machine.
+First, clone or download `seccomp-openttd.json` from this repository into the directory from which you will run the Docker command.
 
 Docker Run:
 ```
@@ -79,7 +79,7 @@ docker run \
     -d --rm \
     --name openttd-patches \
     --security-opt seccomp=$(pwd)/seccomp-openttd.json \
-    -v=$(pwd)/config:/config \
+    -v $(pwd)/config:/config \
     --publish=3000:3000 \
     ghcr.io/h-exx/docker-openttd-patches:latest
 ```
