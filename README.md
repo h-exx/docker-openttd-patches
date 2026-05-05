@@ -64,6 +64,41 @@ The full path would be: `/config/.local/share/openttd/save/`
 In the Web UI, it is in the following path:
 `~/.local/share/openttd/save`
 
+## Troubleshooting
+
+### Invalid permissions / files not found
+On some systems, the default Docker [seccomp](https://docs.docker.com/engine/security/seccomp/) profile restricts syscalls that the OpenTTD binary requires, resulting in "permission denied" or "file not found" errors at startup.
+
+**Workaround:** disable the seccomp profile for the container.
+
+Docker Run:
+```
+docker run \
+    -d --rm \
+    --name openttd-patches \
+    --security-opt seccomp=unconfined \
+    -v=${pwd}/config:/config \
+    --publish=3000:3000 \
+     ghcr.io/h-exx/docker-openttd-patches:latest
+```
+
+Docker Compose:
+```yaml
+version: '3.8'
+services:
+  openttd:
+    image: ghcr.io/h-exx/docker-openttd-patches:latest
+    container_name: openttd-patches
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - 3000:3000 # Web UI
+      #- 3979:3979 # Dedicated Server Port
+    volumes:
+      - ./config:/config:rw
+```
+
 ## Issues
 https://github.com/h-exx/docker-openttd-patches/issues
 
